@@ -18,7 +18,7 @@ public static class Runner
 
         client.MessageReceived += message =>
         {
-            Task.Run(() => ProcessMessage(message, openAiService));
+            Task.Run(() => ProcessMessage(message, openAiService, configurationRoot));
             
             return Task.CompletedTask;
         };
@@ -29,9 +29,17 @@ public static class Runner
         await client.StartAsync();
     }
 
-    private static async Task ProcessMessage(SocketMessage message, IOpenAIService openAiService)
+    private static async Task ProcessMessage(SocketMessage message, IOpenAIService openAiService,
+        IConfiguration configuration)
     {
-        var (systemMessage, userMessage) = IAiRequest.Create(message);
+        var request = IAiRequest.Create(message, configuration.GetValue<string>(nameof(Secrets.BotUsername)));
+
+        if (request is null) return;
+
+        var (systemMessage, userMessage) = request;
+
+        if (string.IsNullOrEmpty(systemMessage) || string.IsNullOrEmpty(userMessage)) return;
+
         var completionResult = await openAiService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest
         {
             Messages = new List<ChatMessage>
@@ -46,7 +54,7 @@ public static class Runner
         if (completionResult.Successful)
         {
             var answer = completionResult.Choices.First().Message.Content;
-            
+
             await message.Channel.SendMessageAsync($"{message.Author.Mention} {answer}");
         }
     }

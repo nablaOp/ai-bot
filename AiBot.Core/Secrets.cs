@@ -1,3 +1,5 @@
+using AiBot.Core.AiRequests;
+
 namespace AiBot.Core;
 
 public class Secrets
@@ -20,6 +22,12 @@ public class Secrets
     /// </summary>
     public ulong? BotGuild { get; set; }
 
+    /// <summary>
+    /// Discord bot username
+    /// To be used in <see cref="IAiRequest.Create"/> to identify bot mentions
+    /// </summary>
+    public string? BotUsername { get; set; }
+    
     /// <summary>
     /// OpenAI API key
     /// 
