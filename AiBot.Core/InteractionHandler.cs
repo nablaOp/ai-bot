@@ -1,10 +1,9 @@
-using System.Reflection;
 using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 
-namespace MallBot.Core;
+namespace AiBot.Core;
 
 public class InteractionHandler(
     DiscordSocketClient client, 
@@ -15,18 +14,17 @@ public class InteractionHandler(
     public async Task InitializeAsync()
     {
         client.Ready += ReadyAsync;
-
-        await RegisterModules();
-
         client.InteractionCreated += HandleInteraction;
+        
+        await RegisterModulesAsync();
     }
 
     private async Task ReadyAsync()
     {
-        var botGuild = config.GetValue<ulong?>(nameof(Secrets.BotTestGuild));
+        var botGuild = config.GetValue<ulong?>(nameof(Secrets.BotGuild));
 
         if (botGuild.HasValue)
-            await interactionService.RegisterCommandsToGuildAsync(botGuild);
+            await interactionService.RegisterCommandsToGuildAsync(botGuild.Value);
         else
             await interactionService.RegisterCommandsGloballyAsync();
     }

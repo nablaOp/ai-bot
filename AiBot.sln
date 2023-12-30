@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiBot", "AiBot\AiBot.csproj", "{35364CBA-D05F-4D3C-9DFD-3332FD7B5F49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiBot.Core", "AiBot.Core\AiBot.Core.csproj", "{59CA859F-FE7C-40FB-B507-19787EB9BA78}"
+EndProject
+Global
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35364CBA-D05F-4D3C-9DFD-3332FD7B5F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35364CBA-D05F-4D3C-9DFD-3332FD7B5F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35364CBA-D05F-4D3C-9DFD-3332FD7B5F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35364CBA-D05F-4D3C-9DFD-3332FD7B5F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59CA859F-FE7C-40FB-B507-19787EB9BA78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59CA859F-FE7C-40FB-B507-19787EB9BA78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59CA859F-FE7C-40FB-B507-19787EB9BA78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59CA859F-FE7C-40FB-B507-19787EB9BA78}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+EndGlobal
