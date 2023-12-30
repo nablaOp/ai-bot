@@ -2,6 +2,7 @@ using AiBot.Core.AiRequests;
 using AiBot.Core.Configuration;
 using Discord;
 using Discord.WebSocket;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OpenAI.Interfaces;
 using OpenAI.ObjectModels.RequestModels;
@@ -12,14 +13,21 @@ public class DiscordClientService(
     DiscordSocketClient discordClient,
     IOpenAIService openAiService,
     InteractionHandler interactionHandler,
+    ILogger<DiscordClientService> logger,
     IOptions<DiscordOptions> discordOptions,
     IOptions<OpenAiExtendedOptions> openAiOptions)
 {
     private readonly DiscordOptions _discordOptions = discordOptions.Value;
     private readonly OpenAiExtendedOptions _openAiOptions = openAiOptions.Value;
-    
+
     public async Task InitAndStartAsync()
     {
+        discordClient.Log += message =>
+        {
+            logger.Log(message);
+            return Task.CompletedTask;
+        };
+        
         discordClient.MessageReceived += message =>
         {
             Task.Run(() => ProcessMessageAsync(message));
@@ -27,7 +35,7 @@ public class DiscordClientService(
         };
 
         await interactionHandler.InitializeAsync();
-        
+
         await discordClient.LoginAsync(TokenType.Bot, _discordOptions.BotToken);
         await discordClient.StartAsync();
     }

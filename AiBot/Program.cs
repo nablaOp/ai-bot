@@ -21,6 +21,8 @@ var discordSocketConfig = new DiscordSocketConfig
         GatewayIntents.GuildEmojis
 };
 
+builder.Services.AddLogging(b => b.AddConsole()); 
+
 // Add extended options to apply unique settings to our application
 builder.Services.Configure<OpenAiExtendedOptions>(
     builder.Configuration.GetSection(OpenAiExtendedOptions.SectionName));
@@ -40,13 +42,6 @@ builder.Services
     .AddSingleton<DiscordClientService>();
 
 var app = builder.Build();
-
-var client = app.Services.GetRequiredService<DiscordSocketClient>();
-client.Log += message =>
-{
-    Console.WriteLine(message.ToString());
-    return Task.CompletedTask;
-};
 
 var discordClientService = app.Services.GetRequiredService<DiscordClientService>();
 await discordClientService.InitAndStartAsync();

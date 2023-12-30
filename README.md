@@ -1,1 +1,1 @@
-# ai-bot
+# A simple Discord bot that can work with OpenAI API.
