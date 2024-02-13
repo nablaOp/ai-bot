@@ -10,7 +10,7 @@ docker run \
 -e OpenAIServiceOptions__ApiKey=[OPEN_AI_KEY] \
 -e Discord__BotToken=[YOUR_DISCORD_BOT_TOKEN] \
 -e Discord__BotGuild=[YOUR_DISCORD_GUILD_ID] \
--e Discord__BotUsername=[YOU_BOT_USER_NAME] \
+-e Discord__BotUsername=[YOUR_BOT_USER_NAME] \
 ai-bot
 ```
 
